@@ -1,0 +1,8 @@
+applications:
+- path: .
+  memory: 100M
+  instances: 1
+  domain: au-syd.mybluemix.net
+  name: NodeJs-Setup
+  host: NodeJs-Setup
+  disk_quota: 1024M

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    <title>NodeJS Starter Application</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <script>
+        const downloadCSVFile = (fileName) => {
+            let a = document.createElement("a");
+            a.style = "display: none";
+            a.href = '/downloadEmployeeCSV/';
+            a.click();
+        }
+
+        const uploadFile = () => {
+            let inputFiles = document.getElementById('fileupload').files;
+            let data = new FormData();
+            data.append('file', inputFiles[0]);
+
+            fetch('/uploadCSV', {
+                    method: 'post',
+                    header: {
+                        "Content-Type": "multipart/form-data"
+                    },
+                    body: data
+                })
+                .then((result) => {
+                    window.alert('file uploaded!!!')
+                })
+                .catch((error) => {
+                    window.alert(error);
+                })
+        }
+    </script>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td style="width:30%;">
+                <img class="newappIcon" src="images/newapp-icon.png">
+            </td>
+            <td>
+                <h1 id="message">Upload and Download CSV</h1>
+                <br>
+                <input type="button" value="downloadCSV" onclick="downloadCSVFile()">
+                <br>
+                <br>
+                <input type="file" name="file" id="fileupload">
+                <input type="button" value="UploadCSV" onclick="uploadFile()">
+
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
